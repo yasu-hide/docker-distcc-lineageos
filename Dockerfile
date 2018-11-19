@@ -14,13 +14,14 @@ ENV CCACHE_SIZE "50G"
 ENV CCACHE_COMPRESS 1
 ENV CCACHE_DIR /ccache
 ENV CCACHE_PREFIX distcc
+ENV DISTCCD_PATH=/lineage/src
 
 RUN apt-get update && apt-get install -y \
     ccache distcc \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
-COPY --from=aosp /lineage/src/prebuilts/clang/host/linux-x86 /lineage/src/prebuilts/clang/host/linux-x86
+COPY --from=aosp /lineage/src/prebuilts/clang/host/linux-x86 $DISTCCD_PATH/prebuilts/clang/host/linux-x86
 RUN ccache -M $CCACHE_SIZE && ccache -s
-WORKDIR $CCACHE_DIR
+WORKDIR $DISTCCD_PATH
 ENTRYPOINT ["/usr/bin/distccd"]
 CMD ["--log-stderr","--no-detach","--user","distccd","--allow","0.0.0.0/0"]
 EXPOSE 3632
