@@ -4,11 +4,14 @@ ENV VERSION_ANDROID android-9.0.0_r16
 RUN apt-get update && apt-get install -y git \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /lineage/src/prebuilts/clang/host \
-    && git clone -b $VERSION_ANDROID https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/ /lineage/src/prebuilts/clang/host/linux-x86
+    && git clone -b $VERSION_ANDROID https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/ /lineage/src/prebuilts/clang/host/linux-x86 \
+    && rm -rf /lineage/src/prebuilts/clang/host/linux-x86/.git
 RUN mkdir -p /lineage/src/prebuilts/gcc/linux-x86/host \
-    && git clone -b $VERSION_ANDROID https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8 /lineage/src/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8
+    && git clone -b $VERSION_ANDROID https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8 /lineage/src/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8 \
+    && rm -rf /lineage/src/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8/.git
 RUN mkdir -p /lineage/src/prebuilts/gcc/linux-x86/arm \
-    && git clone -b $VERSION_ANDROID https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 /lineage/src/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9
+    && git clone -b $VERSION_ANDROID https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 /lineage/src/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 \
+    && rm -rf /lineage/src/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/.git
 
 
 FROM ubuntu:16.04
