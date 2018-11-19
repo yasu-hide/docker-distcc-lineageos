@@ -5,13 +5,14 @@ ENV CCACHE_SIZE "50G"
 ENV CCACHE_COMPRESS 1
 ENV CCACHE_DIR /ccache
 ENV CCACHE_PREFIX distcc
+ENV VERSION_ANDROID android-9.0.0_r16
 
 RUN apt-get update && apt-get install -y \
-    ccache distcc clang build-essential \
+    ccache distcc build-essential \
     && apt-get -y remove gcc g++ \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.8 50 && \
-    update-alternatives --install /usr/bin/cc cc /usr/bin/clang-3.8 50
+RUN mkdir -p /lineage/src/prebuilts/clang/host \
+    && git clone -b $VERSION_ANDROID https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/ /lineage/src/prebuilts/clang/host
 RUN ccache -M $CCACHE_SIZE && ccache -s
 WORKDIR $CCACHE_DIR
 ENTRYPOINT ["/usr/bin/distccd"]
