@@ -17,7 +17,7 @@ ENV CCACHE_PREFIX distcc
 ENV DISTCCD_PATH=/lineage/src
 
 RUN apt-get update && apt-get install -y \
-    ccache distcc \
+    ccache distcc python \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY --from=aosp /lineage/src/prebuilts/clang/host/linux-x86 $DISTCCD_PATH/prebuilts/clang/host/linux-x86
 RUN ccache -M $CCACHE_SIZE && ccache -s
