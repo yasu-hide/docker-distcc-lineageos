@@ -23,5 +23,5 @@ COPY --from=aosp /lineage/src/prebuilts/clang/host/linux-x86 $DISTCCD_PATH/prebu
 RUN ccache -M $CCACHE_SIZE && ccache -s
 WORKDIR $DISTCCD_PATH
 ENTRYPOINT ["/usr/bin/distccd"]
-CMD ["--log-stderr","--no-detach","--user","distccd","--allow","0.0.0.0/0"]
+CMD ["--verbose","--log-stderr","--no-detach","--user","distccd","--allow","0.0.0.0/0"]
 EXPOSE 3632
