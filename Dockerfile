@@ -8,8 +8,7 @@ ENV CCACHE_PREFIX distcc
 ENV VERSION_ANDROID android-9.0.0_r16
 
 RUN apt-get update && apt-get install -y \
-    ccache distcc build-essential \
-    && apt-get -y remove gcc g++ \
+    ccache distcc git \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /lineage/src/prebuilts/clang/host \
     && git clone -b $VERSION_ANDROID https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/ /lineage/src/prebuilts/clang/host
