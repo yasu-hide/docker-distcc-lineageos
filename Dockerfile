@@ -27,7 +27,7 @@ RUN mkdir -p /lineage/src/prebuilts/gcc/linux-x86/arm \
 FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 ENV USE_CCACHE 1
-ENV CCACHE_SIZE "50G"
+ENV CCACHE_SIZE "20G"
 ENV CCACHE_COMPRESS 1
 ENV CCACHE_DIR /ccache
 ENV CCACHE_PREFIX distcc
