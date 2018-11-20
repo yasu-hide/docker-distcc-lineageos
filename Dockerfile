@@ -36,10 +36,10 @@ ENV DISTCCD_PATH=/lineage/src
 RUN apt-get update && apt-get install -y \
     ccache distcc python \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
-COPY --from=aosp /lineage/src/prebuilts/clang $DISTCCD_PATH/prebuilts/clang
-COPY --from=aosp /lineage/src/prebuilts/gcc $DISTCCD_PATH/prebuilts/gcc
+COPY --from=aosp /lineage/src/prebuilts $DISTCCD_PATH/prebuilts
 RUN ccache -M $CCACHE_SIZE && ccache -s
 WORKDIR $DISTCCD_PATH
+ENV TMPDIR=$DISTCCD_PATH
 ENTRYPOINT ["/usr/bin/distccd"]
 CMD ["--verbose","--log-stderr","--no-detach","--user","distccd","--allow","0.0.0.0/0"]
 EXPOSE 3632
