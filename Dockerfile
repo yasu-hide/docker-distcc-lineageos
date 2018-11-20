@@ -40,6 +40,7 @@ COPY --from=aosp /lineage/src/prebuilts $DISTCCD_PATH/prebuilts
 RUN ccache -M $CCACHE_SIZE && ccache -s
 WORKDIR $DISTCCD_PATH
 ENV TMPDIR=$DISTCCD_PATH
+RUN chmod 1777 $TMPDIR
 ENTRYPOINT ["/usr/bin/distccd"]
 CMD ["--verbose","--log-stderr","--no-detach","--user","distccd","--allow","0.0.0.0/0"]
 EXPOSE 3632
