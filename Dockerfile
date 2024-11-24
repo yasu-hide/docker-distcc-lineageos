@@ -1,4 +1,4 @@
-FROM ubuntu:16.04 AS aosp
+FROM ubuntu:xenial-20210114 AS aosp
 ENV DEBIAN_FRONTEND noninteractive
 ENV VERSION_ANDROID android-9.0.0_r16
 RUN apt-get update && apt-get install -y git \
@@ -24,7 +24,7 @@ RUN mkdir -p /lineage/src/prebuilts/gcc/linux-x86/arm \
     && rm -rf /lineage/src/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/.git
 
 
-FROM ubuntu:16.04
+FROM ubuntu:xenial-20210114
 ENV DEBIAN_FRONTEND noninteractive
 ENV USE_CCACHE 1
 ENV CCACHE_SIZE "20G"
